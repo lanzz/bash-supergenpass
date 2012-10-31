@@ -1,6 +1,6 @@
 # Bash shell-script implementation of [SuperGenPass](http://supergenpass.com) password generation
 
-**Usage:** `./supergenpass.sh <domain> [ <length> ]`
+### **Usage:** `./supergenpass.sh <domain> [ <length> ]`
 
 Default `<length>` is 10, which is also the original SuperGenPass default length.
 
