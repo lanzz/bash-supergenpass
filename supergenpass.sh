@@ -1,7 +1,7 @@
 #!/bin/bash
 
 read -srp 'Password: ' master
-domain=$1
+domain=$(echo $1 | tr A-Z a-z)
 length=${2:-10}
 
 hash=$master:$domain
