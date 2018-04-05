@@ -1,15 +1,23 @@
 #!/bin/bash
 
-read -srp 'Password: ' master
-domain=$(echo $1 | tr A-Z a-z)
-length=${2:-10}
+################################################################################
 
-hash=$master:$domain
+default_password_length="10"	### Default is 10. It can be overwritten on an individual basis by adding the custom length as a second argument after the domain when invoking the command.
+hashing_algorithm="md5"		### Default is "md5". Alternate value is "sha512".
+
+################################################################################
+
+domain=$(echo $1 | tr A-Z a-z)
+length=${2:-$default_password_length}
+
+read -srp 'Password: ' master_password
+
+hash=$master_password:$domain
 
 i=0
 while true
 do
-	hash=$(echo -n "$hash" | openssl md5 -binary | base64 | tr +/= 98A)
+	hash=$(echo -n "$hash" | openssl "$hashing_algorithm" -binary | base64 | tr +/= 98A)
 	i=$(($i + 1))
 	if [ $i -lt 10 ]
 	then
