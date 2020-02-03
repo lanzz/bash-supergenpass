@@ -18,7 +18,7 @@ hash=$master_password:$domain
 i=0
 while true
 do
-	hash=$(echo -n "$hash" | openssl "$hashing_algorithm" -binary | base64 -w0 | tr +/= 98A)
+	hash=$(echo -n "$hash" | openssl "$hashing_algorithm" -binary | base64 | tr -d '\n' | tr +/= 98A)
 	i=$(($i + 1))
 	if [ $i -lt 10 ]
 	then
