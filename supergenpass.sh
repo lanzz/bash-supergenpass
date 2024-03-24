@@ -24,7 +24,7 @@ do
 	then
 		continue
 	fi
-	valid=$(echo "${hash:0:$length}" | egrep '^[[:lower:]]' | egrep '.[[:upper:]]' | egrep '.[[:digit:]]')
+	valid=$(echo "${hash:0:$length}" | grep -E '^[[:lower:]]' | grep -E '.[[:upper:]]' | grep -E '.[[:digit:]]')
 	if [ "$valid" != "" ]
 	then
 		break
