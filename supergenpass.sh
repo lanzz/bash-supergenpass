@@ -21,4 +21,9 @@ do
 		break
 	fi
 done
-echo ${hash:0:$length}
+#echo ${hash:0:$length}
+if [ -n "$WAYLAND_DISPLAY" ]; then
+	echo -n ${hash:0:$length} | wl-copy
+else
+	echo ${hash:0:$length} | xsel --clipboard
+fi
