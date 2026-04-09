@@ -30,4 +30,12 @@ do
 		break
 	fi
 done
-echo ${hash:0:$length}
+if [ -n "$WAYLAND_DISPLAY" ] && command -v wl-copy >/dev/null; then
+	echo -n ${hash:0:$length} | wl-copy
+	echo "password copied to Wayland clipboard"
+elif [ -n "$DISPLAY" ] && command -v xsel >/dev/null; then
+	echo ${hash:0:$length} | xsel --clipboard
+	echo "password copied to X clipboard"
+else
+	echo ${hash:0:$length}
+fi
